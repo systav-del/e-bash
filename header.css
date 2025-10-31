@@ -1,5 +1,5 @@
 header {
-    background: linear-gradient(45deg, orange 30%, violet);
+    background: linear-gradient(45deg, rgb(0, 0, 0) 30%, violet);
     height: 30rem;
     background-repeat: no-repeat;
     background-size: cover;
@@ -31,7 +31,7 @@ header {
     min-height: 100%;
     height: 100%;
     min-width: 100%;
-    background: rgba(0, 255, 42, 0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 /* Мобильная версия */
@@ -40,3 +40,19 @@ header {
         height: 60rem;
     }
 }
+```css
+.es-interesting {
+    background-color: antiquewhite;
+}
+
+.es-interesting-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.es-svg-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+}```
