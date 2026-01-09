@@ -1,7 +1,16 @@
 from django.shortcuts import render
+from django.contrib.auth import login
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+
+def index(request):
+    try:
+        context = { 'first_name' : request.user.username }
+        return render(request, 'index.html', context)         
+    except AttributeError as e:
+        return render(request, 'index.html')
+
 
 def index(request):
     return render(request, 'index.html')
@@ -23,16 +32,16 @@ def reg(request):
         password = request.POST.get('password')
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last-name')
+        last_name = request.POST.get('last_name')
 
         # Создаем пользователя
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
+        login(request, user)
+        return JsonResponse({'status' : 'success'})
         
-        #login(request, user)
-
     return render(request, 'reg.html')
     
 
