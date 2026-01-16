@@ -2,7 +2,6 @@ $('#reg-button').click(
     function() {
         let email = $('#email').val();
         let password = $('#password').val();
-        let username = $('#username').val();
         let firstName = $('#first-name').val();
         let lastName = $('#last-name').val();
         let csrf = $('[name=csrfmiddlewaretoken]').val();
@@ -22,7 +21,6 @@ $('#reg-button').click(
             data: {
                 'email' : email,
                 'password' : password,
-                'username' : username,
                 'first_name' : firstName,
                 'last_name' : lastName,
                 'csrfmiddlewaretoken': csrf
@@ -31,8 +29,9 @@ $('#reg-button').click(
             success: function(data) {
                 window.location.href = '/';
             },
-            
-            
+            error: function(data) {
+                alert('вы не зарегестрированы');
+            }   
         });
     }
 );

@@ -8,7 +8,7 @@ $('#auth-button').click(
             alert('введите адрес электронной почты!');
         }
 
-         if (!password) {
+        if (!password) {
             alert('введите пароль!');
         }
 
@@ -23,6 +23,9 @@ $('#auth-button').click(
             type: 'POST',
             dataType: 'json',
             data: userData,
+            success: function(data) {
+                window.location.href = '/';
+            },
         });
     }
 )
