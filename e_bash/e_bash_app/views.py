@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from .models import Item
 
 def index(request):
     try:
@@ -50,3 +51,11 @@ def reg(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def item_template(request, id):
+    item = Item.objects.get(id = id)
+    context = {
+        'item_title' : item.item_title,
+        'photo' : item.photo,
+    }
+    return render(request, 'item_template.html', context)
