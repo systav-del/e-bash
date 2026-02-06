@@ -13,8 +13,7 @@ from django.conf import settings
 # def item_description_path():
 #     return os.path.join(settings.LOCAL_FILE_DIR, "item_descriptions")
 
-def _str_(self):
-    return self_item_titele
+
 
 class Item(models.Model):
     item_title = models.CharField(max_length = 100) # название товара
@@ -30,4 +29,4 @@ class Item(models.Model):
     dop_info = models.TextField() # доп. информация
 
     def __str__(self):
-        return self.item_title
+        return f'{self.id}. {self.item_title}'
