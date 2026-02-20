@@ -14,14 +14,21 @@ from django.conf import settings
 #     return os.path.join(settings.LOCAL_FILE_DIR, "item_descriptions")
 
 
-
 class Item(models.Model):
+
+    clothing_types = (
+        (голов, 'головные уборы'),
+        (верх, 'футболки'),
+        (низ, 'штаны'),
+        (свит, 'свитера')
+    )
+
     item_title = models.CharField(max_length = 100) # название товара
     price = models.IntegerField() # цена
     # description = models.FilePathField() # описание
     photo = models.ImageField() # фото товара
     material = models.CharField(max_length = 20) # материал
-    clothing_type = models.CharField(max_length = 20) # вид одежды
+    clothing_type = models.CharField(max_length = 20, choices=clothing_types) # вид одежды
     clothing_color = models.CharField(max_length = 20) # цвет одежды
     clothing_size = models.CharField(max_length = 3) # размер одежды
     gender = models.CharField(max_length = 7) #мужское/женское/унисекс

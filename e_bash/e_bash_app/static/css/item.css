@@ -22,3 +22,16 @@
     color: #333333;
     font-style: italic;
 }
+
+.item-countainer {
+    border: solid;
+    border-color: #333333;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.item-countainer:hover {
+    background-color:aqua;
+    cursor: pointer;
+}
