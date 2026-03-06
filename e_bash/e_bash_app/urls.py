@@ -4,10 +4,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Главная страница
     path('', views.index, name='index'),
-    path('auth/', views.auth, name='auth'),
-    path('register/', views.reg, name='register'),
+    
+    #Страница авторизации
+    path('auth/', views.auth, name='auth'), # name - это имя маршрута
+
+    #Страница регистрации
+    path('reg/', views.reg, name='reg'),
+
     path('logout/', views.logout_view, name='logout'),
-    path('item/<int:id>', views.item_template, name='item')
+
+    path('items/<int:id>', views.item_template, name='item'),
+
+    path('items/', views.items_list, name='items_list')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

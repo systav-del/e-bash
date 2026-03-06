@@ -58,3 +58,11 @@ def item_template(request, id):
         'item' : item
     }
     return render(request, 'item_template.html', context)
+
+def items_list(request):
+    items_list = Item.objects.all()
+    print(items_list)
+    context = {
+        'items_list' : items_list
+    }
+    return render(request, 'items_list.html', context)
