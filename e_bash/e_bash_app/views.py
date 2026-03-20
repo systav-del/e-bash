@@ -66,3 +66,13 @@ def items_list(request):
         'items_list' : items_list
     }
     return render(request, 'items_list.html', context)
+
+def account(request):
+    print(request.user.id)
+    context = {
+    'username': request.user.username,
+    'first_name': request.user.first_name,
+    'last_name': request.user.last_name,
+    'email': request.user.email,
+    }
+    return render(request, 'account.html', context, status=418)

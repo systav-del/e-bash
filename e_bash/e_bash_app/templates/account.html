@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titile %}Акаунт - продукты 24Х{% eтвидщсл %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/account.css %}">
+{% end block %}
+
+{% block content %}
+    {% csrf_token %}
+    <main class="container account">
+        <h1>настройки профиля</h1>
+        <!--имя-->
+        <label for="first-name" class="form-label">Имя</label>
+        <input type="text" class="form-control" id="first-name" placeholder="Введите имя" value="{{ first_name }}">
+
+        <!--Фамилия-->
+        <label for="last_name" class="form-label reg-label">фамилия</label>
+        <input type="text" class="form-control" id="last-name" placeholder="Введите фамилию" value="{{ first_name }}">
+
+         <!--дата рождения-->
+        <label for="birthdate" class="form-label reg-label">дата рождения</label>
+        <input type="date" class="form-control" id="birthdate" placeholder="Введите дату рождения" value="{{ birthdate }}">
+        <small id="birthdate-info" class="from-text text-muted">Извините, дату рождения изменить нельзя</small>
+        <br>
+
+        <!--почта-->
+        <label for="email" class="form-label reg-label">электронная почта</label>
+        <input type="email" class="form-control" id="email" placeholder="Введите почту" value="{{ email }}">
+
+        <!--пароль-->
+        <label for="password" class="form-label reg-label">пароль</label>
+        <input type="text" class="form-control" id="password" placeholder="Введите пароль" value="{{ password }}">
+
+        <!--Кнопка регистрации-->
+        <input type="button" class="btn btn-dark" id="save-button" placeholder="сохранить">
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src={% static 'js/account.js' %}
+{% endblock %}
+
+        
+
+
