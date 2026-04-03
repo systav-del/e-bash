@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('logout/', views.logout_view, name='logout'),
 
-    path('items/<int:id>', views.item_template, name='item'),
+    path('items/<str:clothing_type>', views.item_template, name='item'),
 
     path('items/', views.items_list, name='items_list'),
 

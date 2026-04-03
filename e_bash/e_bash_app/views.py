@@ -57,15 +57,17 @@ def item_template(request, id):
     context = {
         'item' : item
     }
-    return render(request, 'item_template.html', context)
+    return render(request, 'item_template.html', context) +
 
-def items_list(request):
-    items_list = Item.objects.all()
-    print(items_list)
-    context = {
-        'items_list' : items_list
+def items_list(request, clothing_type):
+    if clothing_type == 'all':
+        items = Item.objects.all()
+    else:
+        items =Item.objects.filter(clothing_type = clothing_type)
+    context ={
+        'items_list' : items,
     }
-    return render(request, 'items_list.html', context)
+    return render(request, 'items_list.html', context)  
 
 def account(request):
     print(request.user.id)
@@ -75,4 +77,4 @@ def account(request):
     'last_name': request.user.last_name,
     'email': request.user.email,
     }
-    return render(request, 'account.html', context, status=418)
+    return render(request, 'account.html', context,)

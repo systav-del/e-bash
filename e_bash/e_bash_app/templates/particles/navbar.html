@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
          <i class="fa-solid fa-bolt"></i>
          E-bash
       </a>
@@ -25,9 +25,11 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     {{ first_name }}
+
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href={% url 'logout' %}>Выйти</a></li>
+                   <li><a class="dropdown-item" id="account-link" href={% url 'account' %}>Профиль</a></li>
+                    <li><a class="dropdown-item" id="logout-link" href={% url 'logout' %}>Выйти</a></li>
                 </ul>
             </li>
             {% else %}
@@ -42,9 +44,15 @@
                     Dropdown link
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href={%  url 'item' 't-shirt' %}>футболка</a></li>
+                <li><a class="dropdown-item" href={%  url 'item' 'sweater' %}>свитер</a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+                <li><a class="dropdown-item" href={%  url 'item' '' %}></a></li>
+              
               </ul>
            </li>
         </ul>

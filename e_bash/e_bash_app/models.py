@@ -17,10 +17,10 @@ from django.conf import settings
 class Item(models.Model):
 
     clothing_types = (
-        ('голов', 'головные уборы'),
-        ('верх', 'футболки'),
-        ('низ', 'штаны'),
-        ('свит', 'свитера')
+        ('headwear', 'головные уборы'),
+        ('outerwear', 'футболки'),
+        ('underwear', 'штаны'),
+        ('sweater', 'свитера')
     )
 
     item_title = models.CharField(max_length = 100) # название товара
