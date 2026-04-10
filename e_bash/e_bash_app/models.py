@@ -20,7 +20,10 @@ class Item(models.Model):
         ('headwear', 'головные уборы'),
         ('outerwear', 'футболки'),
         ('underwear', 'штаны'),
-        ('sweater', 'свитера')
+        ('sweater', 'свитера'),
+        ('boots', 'ботинки'),
+        ('gloves', 'перчатки'),
+        ('socks', 'носки'),
     )
 
     item_title = models.CharField(max_length = 100) # название товара

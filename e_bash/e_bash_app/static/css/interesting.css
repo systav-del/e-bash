@@ -1,0 +1,66 @@
+.es-interesting {
+    padding-top: 2rem;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.es-interesting-main-title, .es-interesting-main-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.es-interesting-main-title {
+    font-size: 2rem;
+}
+
+.es-interesting-main-subtitle {
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    line-height: 1.5rem;
+}
+
+#second-interesting-row {
+    margin-top: 1rem;
+}
+
+.es-svg-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+}
+
+.es-interesting-icon {
+    width: 3rem;
+    font-size: 1.5rem;
+}
+
+.es-interesting-text-block {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.es-interesting-title, .es-interesting-text {
+    word-break: break-word;
+}
+
+.es-interesting-text {
+    line-height: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+    .interesting-col {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+
+    #first-interesting-col {
+        margin-top: 0;
+    }
+
+    #second-interesting-row {
+        margin-top: 0;
+    }
+}

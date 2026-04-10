@@ -13,7 +13,7 @@
     <header>
         <div class="container text-white pt-5 roboto-italic es-header-bg">
             <h1 class="es-header-title">
-                магазин автозапчастей
+                GEOS
             </h1>
             <h2 class="es-header-title">
                 ул.Ленина, 102
@@ -27,15 +27,78 @@
     <section class="es-interesting">
         <div class="container">
             <div class="row">
-                <h1 class="es-interesting-title">Lorem</h1>
-                <h2 class="es-interesting-title">Ipsum</h2>
+                <h1 class="es-interesting-main-title">Почему выбирают нас</h1>
+                <h2 class="es-interesting-main-subtitle">сотни хороших отзывов каждый день!</h2>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-4">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4 interesting-col" id="first-interesting-col">
                         <div class="d-flex">
                             <div class="es-interesting-icon">
-                                <i class="fe-solid"></i>
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">качественный материал</h3>
+                                <p class="es-interesting-text">Ежедневная поставка вещей на склад!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 interesting-col">
+                        <div class="d-flex">
+                            <div class="es-interesting-icon">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">отзывчивая поддержка</h3>
+                                <p class="es-interesting-text">в сети 24/7, поможем со всем</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 interesting-col">
+                        <div class="d-flex">
+                            <div class="es-interesting-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">частые скидки</h3>
+                                <p class="es-interesting-text">во время праздников действуют акции, низкие цены</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center pb-3" id="second-interesting-row">
+                <div class="row">
+                    <div class="col-4 interesting-col">
+                        <div class="d-flex">
+                            <div class="es-interesting-icon">
+                                <i class="fa-solid fa-motorcycle"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">Быстрая доставка</h3>
+                                <p class="es-interesting-text">Привезём заказ прямо к вашей двери</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 interesting-col">
+                        <div class="d-flex">
+                            <div class="es-interesting-icon">
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">оригинальные вещи</h3>
+                                <p class="es-interesting-text">продаем вещи запечатанные, со всеми бирками</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 interesting-col">
+                        <div class="d-flex">
+                            <div class="es-interesting-icon">
+                                <i class="fa-solid fa-fish-fins"></i>
+                            </div>
+                            <div class="es-interesting-text-block">
+                                <h3 class="es-interesting-title">Широкий ассортимент</h3>
+                                <p class="es-interesting-text">Всё необходимое в одном месте — от головных уборов до кросовок</p>
                             </div>
                         </div>
                     </div>
@@ -43,4 +106,20 @@
             </div>
         </div>
     </section>
+
+    	<!-- Блок обратной связи -->
+	<section class="feedback">
+		<div class="container">
+			<div class="col-sm-12 d-flex justify-content-center">
+				<div class="title">
+					<h2 class="title-main">Полезная рассылка</h2>
+					<p class="title-text">Будьте в курсе о поставке вещей на склад</p>
+					<div class="feedback-form">
+						<input type="email" class="form-control" name="email" id="email" placeholder="Введите адрес почты">
+						<button id="submit-button" class="form-control btn btn-dark">Подписаться</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
     {% endblock %}

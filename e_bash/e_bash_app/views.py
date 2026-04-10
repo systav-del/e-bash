@@ -57,7 +57,7 @@ def item_template(request, id):
     context = {
         'item' : item
     }
-    return render(request, 'item_template.html', context) +
+    return render(request, 'item_template.html', context)
 
 def items_list(request, clothing_type):
     if clothing_type == 'all':
