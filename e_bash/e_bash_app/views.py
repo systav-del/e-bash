@@ -52,22 +52,44 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
-def item_template(request, id):
-    item = Item.objects.get(id = id)
+def items_list(request, clothing_type):
+    clothing_type_name = ''
+
+    if clothing_type == 'all':
+        item = Item.objects.all()
+        clothing_type_name = 'Всё'
+    else:
+        item = Item.objects.filter(clothing_type = clothing_type)
+
+        clothing_types = Item.clothing_types
+    
+        for ft in clothing_types:
+            if ft[0] == clothing_type:
+                clothing_type_name = ft[1]
+                break
+            
     context = {
+        'items_list' : item,
+        'clothing_type' : clothing_type_name
+    }
+    return render(request, 'items_list.html', context)
+
+# def items_list(request, clothing_type):
+#     if clothing_type == 'all':
+#         items = Item.objects.all()
+#     else:
+#         items =Item.objects.filter(clothing_type = clothing_type)
+#     context ={
+#         'items_list' : items,
+#     }
+#     return render(request, 'items_list.html', context)  
+
+def item_template(request, id):
+    item = item.objects.get(id = id) # конструктор класса
+    context = { 
         'item' : item
     }
     return render(request, 'item_template.html', context)
-
-def items_list(request, clothing_type):
-    if clothing_type == 'all':
-        items = Item.objects.all()
-    else:
-        items =Item.objects.filter(clothing_type = clothing_type)
-    context ={
-        'items_list' : items,
-    }
-    return render(request, 'items_list.html', context)  
 
 def account(request):
     print(request.user.id)

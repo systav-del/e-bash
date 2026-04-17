@@ -18,7 +18,7 @@ class Item(models.Model):
 
     clothing_types = (
         ('headwear', 'головные уборы'),
-        ('outerwear', 'футболки'),
+        ('t-shirt', 'футболка'),
         ('underwear', 'штаны'),
         ('sweater', 'свитера'),
         ('boots', 'ботинки'),
