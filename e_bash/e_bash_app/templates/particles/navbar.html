@@ -13,7 +13,7 @@
               <a class="nav-link active" aria-current="page" href="#">главная, объявления</a>
            </li>
            <li class="nav-item">
-              <a class="nav-link" href="#">акции, товары</a>
+              <a class="nav-link" href={% url 'items_list' 'all' %}>акции, товары</a>
            </li>
            <li class="nav-item">
               <a class="nav-link" href="#">корзина и оформление</a>
@@ -44,14 +44,14 @@
                      категории одежды
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href={%  url 'item' 't-shirt' %}>футболка</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'sweater' %}>свитер</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'hats' %}>головные уборы</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'trousers' %}>штаны</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'boots' %}>ботинки</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'socks' %}>носки</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'decorations' %}>украшения</a></li>
-                <li><a class="dropdown-item" href={%  url 'item' 'gloves' %}>перчатки</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 't-shirt' %}>футболка</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'sweater' %}>свитер</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'hats' %}>головные уборы</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'trousers' %}>штаны</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'boots' %}>ботинки</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'socks' %}>носки</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'decorations' %}>украшения</a></li>
+                <li><a class="dropdown-item" href={%  url 'items_list' 'gloves' %}>перчатки</a></li>
               
               </ul>
            </li>

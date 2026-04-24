@@ -5,7 +5,7 @@
 
 {% block css %}
     <link rel="stylesheet" href={% static 'css/header.css' %}>
-    <link rel="stylesheet" href={% static 'css/good.css' %}>
+    <link rel="stylesheet" href={% static 'css/item.css' %}>
 {% endblock %}
 
 {% block content %}
@@ -14,11 +14,11 @@
     {% for items in items_list %}
         <div class="col-4">
             <div class="card" style="width: 18rem;">
-                <img src="{{ items.photo.url }}" class="card-img-top" alt="{{ items.item_title }}">
+                <img src="{{ items.photo.url }}" class="card-img-top item-img" alt="{{ items.item_title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ items.item_title }}</h5>
                     <p class="card-text">{{ items.price }}</p>
-                    <a href="{{ items.id }}" class="btn btn-primary">Перейти куда-нибудь</a>
+                    <a href="/item/{{ items.id }}" class="btn btn-primary">Перейти куда-нибудь</a>
                 </div>
             </div>
         </div>

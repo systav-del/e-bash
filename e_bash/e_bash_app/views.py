@@ -85,7 +85,7 @@ def items_list(request, clothing_type):
 #     return render(request, 'items_list.html', context)  
 
 def item_template(request, id):
-    item = item.objects.get(id = id) # конструктор класса
+    item = Item.objects.get(id = id) # конструктор класса
     context = { 
         'item' : item
     }

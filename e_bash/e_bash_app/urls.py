@@ -15,9 +15,9 @@ urlpatterns = [
 
     path('logout/', views.logout_view, name='logout'),
 
-    path('items/<str:clothing_type>', views.items_list, name='item'),
+    path('items/<str:clothing_type>', views.items_list, name='items_list'),
 
-    path('items/', views.items_list, name='items_list'),
+    path('item/<int:id>', views.item_template, name='item'),
 
     path('account/', views.account, name='account')
 ]
