@@ -1,39 +1,58 @@
 $('#reg-button').click(
     function() {
+
+        // Подбираем данные с HTML
         let email = $('#email').val();
         let password = $('#password').val();
         let firstName = $('#first-name').val();
         let lastName = $('#last-name').val();
-        let csrf = $('[name=csrfmiddlewaretoken]').val();
+        let regButton = $('#reg-button');
 
+        regButton.prop('disabled', true);
+        regButton.prop('hidden', true);
+        $('.reg').append(`
+            <div id="reg-spinner" class="spinner-border mt-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        `)
+
+        const CSRF = $('[name=csrfmiddlewaretoken]').val();
+        
         if(!email) {
-            alert('Введите адрес почты');
+            alert('Введите адрес электронной почты!');
         }
 
         if(!password) {
-            alert('Введите пароль');
+            alert('Введите пароль!');
+        }
+
+        let userData = {
+            'email' : email,
+            'password' : password,
+            'birthdate' : birthdate,
+            'firstName' : firstName,
+            'lastName' : lastName,
+            'csrfmiddlewaretoken': CSRF
         }
 
         $.ajax({
-            url: '/register/',
-            type: 'POST', // отправляем POST-запрос на сервер
+            url: '/reg/',
+            type: 'POST',
             dataType: 'json',
-            data: {
-                'email' : email,
-                'password' : password,
-                'first_name' : firstName,
-                'last_name' : lastName,
-                'csrfmiddlewaretoken': csrf
-            },
+            data: userData,
 
             success: function(data) {
-                window.location.href = '/';
+                window.location.href = data.redirect;
             },
-            error: function(data) {
-                alert('вы не зарегестрированы');
-            }   
+
+            error: function(xhr) {
+                if(xhr.responseJSON) {
+                    $('#reg-spinner').remove();
+                    regButton.val(xhr.responseJSON.message);
+                    regButton.css('background-color', 'red');
+                }
+            }    
         });
     }
 );
-
        

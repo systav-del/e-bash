@@ -1,8 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Item
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Item, EmailCode
+from django.core.mail import send_mail
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.conf import settings
+import random
+import threading
 
 def index(request):
     try:
@@ -27,6 +34,15 @@ def auth(request):
             return JsonResponse({ 'status' : 'error' })      
     return render(request, 'auth.html')
 
+def send_email_code_async(email, code):
+    send_mail(
+        'Продукты 24/7: код подтверждения',
+        f'Ваш код подтверждения: {code}',
+        'edsuyargulov@yandex.ru',
+        [email],
+        fail_silently=False,
+    )
+
 def reg(request):
     # Если приходит POST-запрос
     if request.method == 'POST':
@@ -37,10 +53,35 @@ def reg(request):
         username = email
 
         # Создаем пользователя
-        user = User.objects.create_user(username, email, password)
-        user.first_name = first_name
-        user.last_name = last_name
-        user.save()
+        user = User.objects.create_user(
+            username = email, 
+            email = email, 
+            password = password, 
+            first_name = first_name, 
+            last_name = last_name,
+            is_active = False
+        )
+
+        UserProfile.objects.create(
+            user = user, 
+        )
+
+        code = str(random.randint(100000, 999999))
+
+        EmailCode.objects.create(
+            user = user,
+            code = code
+        )
+        threading.Thread(
+            target=send_email_code_async,
+            args=(email, code)
+        ).start()        
+
+        request.session['pending_user_id'] = user.id
+        return JsonResponse({
+            'status': 'success',
+            'redirect': '/confirm/'
+        })
 
         login(request, user)
 
@@ -100,3 +141,27 @@ def account(request):
     'email': request.user.email,
     }
     return render(request, 'account.html', context,)
+
+def confirm(request):
+    if request.method == 'POST':
+        code = request.POST.get('email-code')
+        user_id = request.session.get('pending_user_id')
+
+        if user_id:
+            try:
+                user = User.objects.get(id = user_id)
+                email_code = EmailCode.objects.get(user = user, code = code)
+
+                if email_code.code == code:
+                    if not email_code.is_expired():
+                        user.is_active = True
+                        user.save()
+                        email_code.delete()
+                        login(request, user)
+                        return JsonResponse({'status' : 'success', 'redirect' : '/account/'})
+                    else:
+                        return JsonResponse({'status': 'error', 'message': 'Срок действия кода истек'}, status=400)
+            except ObjectDoesNotExist:
+                return JsonResponse({'status': 'error', 'message': 'Неверный код'}, status=400)
+
+    return render(request, 'confirm.html')
