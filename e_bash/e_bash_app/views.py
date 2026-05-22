@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Item, EmailCode
+from .models import Item, EmailCode, EmailDigest
 from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -36,9 +36,9 @@ def auth(request):
 
 def send_email_code_async(email, code):
     send_mail(
-        'Продукты 24/7: код подтверждения',
+        'Код подтверждения',
         f'Ваш код подтверждения: {code}',
-        'edsuyargulov@yandex.ru',
+        settings.MY_EMAIL_HOST_USER,
         [email],
         fail_silently=False,
     )
@@ -62,16 +62,13 @@ def reg(request):
             is_active = False
         )
 
-        UserProfile.objects.create(
-            user = user, 
-        )
-
         code = str(random.randint(100000, 999999))
 
         EmailCode.objects.create(
             user = user,
             code = code
         )
+
         threading.Thread(
             target=send_email_code_async,
             args=(email, code)
@@ -82,12 +79,11 @@ def reg(request):
             'status': 'success',
             'redirect': '/confirm/'
         })
-
-        login(request, user)
-
-        return JsonResponse({'status' : 'success'})
         
-    return render(request, 'reg.html')
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        return render(request, 'reg.html')
     
 def logout_view(request):
     logout(request)
@@ -165,3 +161,27 @@ def confirm(request):
                 return JsonResponse({'status': 'error', 'message': 'Неверный код'}, status=400)
 
     return render(request, 'confirm.html')
+
+def email(request):
+    if request.method == 'POST':
+        if request.POST.get('email'):
+            try:
+                email = request.POST.get('email')
+                validate_email(email)
+            except ValidationError:
+                return JsonResponse({'status': 'error', 'message' : 'Неправильно ввёден адрес почты'}, status=400)
+
+            send_mail(
+                "Полезная рассылка",
+                "Вы будете получать полезную рассылку о поступлениях товаров на склад.",
+                settings.MY_EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+            )
+
+            email_digest = EmailDigest(email = email)
+            email_digest.save()
+
+            return JsonResponse({'status': 'success', 'message' : 'Отправлено'})
+    else:
+        return JsonResponse({'status' : 'error', 'message' : 'Метод не разрешён. Только POST.'}, status=405)

@@ -23,6 +23,8 @@ urlpatterns = [
 
     path('confirm/', views.confirm, name='confirm'),
 
+    path('email/', views.email, name='email'),
+
     # path('cart/', views.cart_detail, name='cart_detail'),
 
     # path('cart/add/<int:good_id>', views.cart_add, name='cart_add'),

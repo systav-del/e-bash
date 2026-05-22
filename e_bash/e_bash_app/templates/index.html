@@ -115,6 +115,7 @@
 					<h2 class="title-main">Полезная рассылка</h2>
 					<p class="title-text">Будьте в курсе о поставке вещей на склад</p>
 					<div class="feedback-form">
+                        {% csrf_token %}
 						<input type="email" class="form-control" name="email" id="email" placeholder="Введите адрес почты">
 						<button id="submit-button" class="form-control btn btn-dark">Подписаться</button>
 					</div>
