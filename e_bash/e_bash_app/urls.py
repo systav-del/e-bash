@@ -25,13 +25,13 @@ urlpatterns = [
 
     path('email/', views.email, name='email'),
 
-    # path('cart/', views.cart_detail, name='cart_detail'),
+    path('cart/', views.cart_detail, name='cart_detail'),
 
-    # path('cart/add/<int:good_id>', views.cart_add, name='cart_add'),
+    path('cart/add/<int:good_id>', views.cart_add, name='cart_add'),
 
-    # path('cart/remove/<int:good_id>/', views.cart_remove, name='cart_remove'),
+    path('cart/remove/<int:good_id>/', views.cart_remove, name='cart_remove'),
 
-    # path('cart/clear/', views.cart_clear, name='cart_clear')
+    path('cart/clear/', views.cart_clear, name='cart_clear')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

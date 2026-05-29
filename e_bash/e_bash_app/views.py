@@ -185,3 +185,73 @@ def email(request):
             return JsonResponse({'status': 'success', 'message' : 'Отправлено'})
     else:
         return JsonResponse({'status' : 'error', 'message' : 'Метод не разрешён. Только POST.'}, status=405)
+
+def cart_add(request, item_id):
+    if request.user.is_authenticated:
+        item = get_object_or_404(Good, id=item_id)
+
+        qty = int(request.GET.get('qty', 1))
+
+        cart = request.session.get('cart', {})
+        item_id_str = str(item.id)
+
+        cart[item_id_str] = cart.get(item_id_str, 0) + qty
+
+        request.session['cart'] = cart
+        request.session.modified = True
+
+        return redirect('cart_detail')
+    else:
+        return redirect('auth')
+
+def cart_detail(request):
+    if request.user.is_authenticated:
+        cart = request.session.get('cart', {})
+
+        items = Good.objects.filter(id__in=cart.keys())
+
+        cart_items = []
+
+        for item in items:
+            quantity = cart[str(item.id)]
+            total_price = item.price * quantity
+
+            cart_items.append({
+                'item': item,
+                'quantity': quantity,
+                'total_price': total_price
+            })
+
+        context = {
+            'cart_items': cart_items,
+            'username' : request.user.username
+        }
+
+        return render(request, 'cart.html', context)
+    else:
+        return redirect('auth')
+
+def cart_remove(request, item_id):
+    if request.user.is_authenticated:
+        cart = request.session.get('cart', {})
+
+        item_id_str = str(item_id)
+
+        if item_id_str in cart:
+            del cart[item_id_str]
+
+        request.session['cart'] = cart
+        request.session.modified = True
+
+        return redirect('cart_detail')
+    else:
+        return redirect('auth')
+
+def cart_clear(request):
+    if request.user.is_authenticated:
+        request.session['cart'] = {}
+        request.session.modified = True
+
+        return redirect('cart_detail')
+    else:
+        return redirect('auth')
